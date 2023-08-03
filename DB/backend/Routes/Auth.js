@@ -3,6 +3,7 @@ const express = require('express')
 const User = require('../models/User')
 const Order = require('../models/Students')
 const Op = require('../models/Op')
+const Qa = require('../models/adhd')
 const router = express.Router()
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs')
@@ -147,6 +148,12 @@ router.get("/products", async(req, res) => {
     await Op.create({
         mail: req.body.mail,
         name: req.body.data1,
+    })
+});
+
+router.post('/adhd', async (req, res) => {
+    await Qa.create({
+        name: req.body
     })
 });
 

@@ -12,6 +12,7 @@ import Home from './Pages/Home'
 import Footer  from './components/Footer'
 import Chat from './components/Chat'
 import Comp from './Pages/Comp'
+import Reg from './Pages/Regpage'
 
 //import Re from './components/Re'
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/ree' element={<Ree />} />
         <Route path='/chat' element={<Chat />} />
         <Route path='/comp' element={<Comp />} />
+        <Route path='/reg' element={<Reg />} />
       </Routes>
       <Footer />
     </div>

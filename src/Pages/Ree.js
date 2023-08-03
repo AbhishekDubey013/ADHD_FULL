@@ -59,17 +59,16 @@ function App() {
       sender: "user"
     }));
 
-    data1.forEach(qr => {
-      let score =0;
-      console.log(qr.response)
-      if (qr.response === "very often") {
-        score = 2;
-      }
-      sum += score;
-      
-    });
+    // let a = data1.map(qr => `${qr.question}: ${qr.response}`).join("\n")
+    let a = data1
+    // const response = await fetch("http://localhost:5001/api/auth/adhd", {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({a})
+    // });
 
-    console.log("Sum of scores:", sum);
 
     const additionalMessage = {
       message:
@@ -156,10 +155,11 @@ function App() {
           <div className="store-data">
           {isDiagnosed ? (
             <Link to={{
-              pathname: '/chat'
+              pathname: '/reg'
             }}>
               <button>Go to Chat</button>
             </Link>
+            
           ) : (
             <button onClick={handleCompleteStoreData}>Diagnose</button>
           )}
