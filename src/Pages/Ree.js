@@ -155,7 +155,7 @@ function App() {
           <div className="store-data">
           {isDiagnosed ? (
             <Link to={{
-              pathname: '/reg'
+              pathname: '/chat'
             }}>
               <button>Go to Chat</button>
             </Link>
