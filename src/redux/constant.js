@@ -7,6 +7,7 @@ export const SEARCH_PRODUCT="SEARCH_PRODUCT"
 export const ADD_Q="ADD_Q"
 export const ADD_R="ADD_R"
 export const ADD_RC="ADD_RC"
+export const RESET_DATA = 'RESET_DATA';
 
 //nOTHING BUT JUST DEFINING EVERY ACTION TYPE
 

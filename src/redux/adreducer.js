@@ -1,4 +1,4 @@
-import { ADD_R } from './constant';
+import { ADD_R,RESET_DATA } from './constant';
 
 // Define the initial state
 const initialState = {
@@ -14,6 +14,8 @@ export const reducera = (state = initialState, action) => {
         ...state,
         questionResponses: [...state.questionResponses, action.payload]
       };
+      case RESET_DATA:
+      return initialState; // Reset to initial state
     default:
       return state;
   }

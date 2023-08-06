@@ -1,11 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { adddata } from './context/ContextProvider';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
+import { resetData } from '../redux/action'; 
+import { useSelector } from 'react-redux';
 
 const Register = () => {
 
     const { udata, setUdata } = useContext(adddata);
-
+    const navigate = useNavigate();
+    let data1 = useSelector((state) => state.reducera.questionResponses);
+    const dispatch = useDispatch();
     // const history = useHistory();
 
     const [inpval, setINP] = useState({
@@ -32,7 +38,7 @@ const Register = () => {
 
     const addinpdata = async (e) => {
         e.preventDefault();
-
+        navigate('/chat');
         const { name, email, work, add, mobile, desc, age } = inpval;
 
         const res = await fetch("https://gt-7tqn.onrender.com/api/auth/register", {
@@ -55,11 +61,39 @@ const Register = () => {
         } else {
             //history.push("/")
             localStorage.setItem("mobile", mobile);
-            setUdata(data)
+            //setUdata(data)
             console.log("data added");
 
         }
+          await apiCallToStoreDataInServer();
+          console.log("done")
+        dispatch(resetData());
     }
+    const dataArray = data1.map((qr) => qr.response);
+
+    const apiCallToStoreDataInServer = async e => {
+        // Get the complete store data using useSelector
+        const mobileNumber = localStorage.getItem('mobile');
+        // Construct the data object
+        try {
+          console.log(mobileNumber)
+          console.log(dataArray)
+          const response = await fetch('https://gt-7tqn.onrender.com/api/auth/abc', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ mobileNumber, dataArray }),
+          });
+      
+          if (!response.ok) {
+            throw new Error('Failed to store data in the server');
+          }
+        }
+        catch (error) {
+          throw new Error('Error storing data in the server: ' + error.message);
+        }
+      };
 
     return (
         <div className="container">

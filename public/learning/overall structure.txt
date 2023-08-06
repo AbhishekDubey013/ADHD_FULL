@@ -22,3 +22,5 @@ Now you can use Button and Text components
 <Text />
 
 *******Basically these all will be classes and when u call them with parameters u will be making there object or also called as their instances
+
+3. the parameter which are passing through frontend should have same name as on backend

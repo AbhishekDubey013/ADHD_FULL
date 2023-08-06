@@ -5,12 +5,12 @@ import {Routes, Route, useLocation} from 'react-router-dom'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import {add_rc} from '../redux/action'
-
+import { useNavigate } from 'react-router-dom';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 // "Explain things like you would to a 10 year old learning how to code."
 const systemMessage = { //  Explain things like you're talking to a software professional with 5 years of experience.
-  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient, ask question one by one and next question ask should be based on previous response provide. Ask a total of 10 question and self survey questionare is already performed and provided to you, focus on area with rating as very often and often, dont say that you are ai,"
+  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient, ask question one by one and next question ask should be based on previous response provide. you have a total 7 questions to ask and self survey questionare is already performed and provided to you, focus on area with rating as very often and often, dont say that you are ai,"
 }
 
 function App() {
@@ -22,6 +22,45 @@ function App() {
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
+   let dataArray = messages;
+   const navigate = useNavigate();
+
+   
+
+   const apiCallToStoreDataInServer = async () => {
+    try {
+      // Get the complete store data using useSelector
+      const mobileNumber = localStorage.getItem('mobile');
+      // Construct the data object
+      console.log(mobileNumber)
+      console.log(dataArray)
+      const response = await fetch('https://gt-7tqn.onrender.com/api/auth/abc', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mobileNumber, dataArray }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to store data in the server');
+      }
+    } catch (error) {
+      throw new Error('Error storing data in the server: ' + error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (messages.length === 10) {
+      try {
+        apiCallToStoreDataInServer().then(() => {
+          navigate('/ft'); // Navigate after API call is complete
+        });
+      } catch (error) {
+        console.error('Error storing data:', error);
+      }
+    }
+  }, [messages]);
 
   let data1 = useSelector((state) => state.reducera.questionResponses);
   let data2 = useSelector((state) => state.rchat.RC);
@@ -34,8 +73,6 @@ const storeData = data1.map(qr => ({
   const systemMessage1 = { //  Explain things like you're talking to a software professional with 5 years of experience.
     "role": "system", "content": data1.map(qr => `${qr.question}: ${qr.response}`).join("\n")
   }
-
-  console.log({data1})
   const handleSend = async (message) => {
     const newMessage = {
       message,
@@ -96,7 +133,6 @@ const storeData = data1.map(qr => ({
     }).then((data) => {
       return data.json();
     }).then((data) => {
-      console.log(data);
       setMessages([...chatMessages, {
         message: data.choices[0].message.content,
         sender: "ChatGPT"
@@ -115,7 +151,6 @@ const storeData = data1.map(qr => ({
               typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
             >
               {messages.map((message, i) => {
-                console.log(message)
                 return <Message key={i} model={message} />
               })}
             </MessageList>

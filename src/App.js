@@ -6,13 +6,16 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Products from './components/Products';
 import Ree from './Pages/Ree'
-import Form1 from './Pages/Form1'
+import Form1 from './Pages/Formi'
 import Navbar from './components/Navbar'
 import Home from './Pages/Home'
 import Footer  from './components/Footer'
 import Chat from './components/Chat'
 import Comp from './Pages/Comp'
 import Reg from './Pages/Regpage'
+import Ft from './Pages/Formt'
+import End from './Pages/End'
+
 
 //import Re from './components/Re'
 function App() {
@@ -30,6 +33,8 @@ function App() {
         <Route path='/chat' element={<Chat />} />
         <Route path='/comp' element={<Comp />} />
         <Route path='/reg' element={<Reg />} />
+        <Route path='/ft' element={<Ft />} />
+        <Route path='/end' element={<End />} />
       </Routes>
       <Footer />
     </div>
