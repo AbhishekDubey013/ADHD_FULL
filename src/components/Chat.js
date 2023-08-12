@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const API_KEY = process.env.REACT_APP_API_KEY;
 // "Explain things like you would to a 10 year old learning how to code."
 const systemMessage = { //  Explain things like you're talking to a software professional with 5 years of experience.
-  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient, ask question one by one and next question ask should be based on previous response provide. you have a total 7 questions to ask and self survey questionare is already performed and provided to you, focus on area with rating as very often and often, dont say that you are ai,"
+  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient, ask of history, past experiences traumatic experiences ask question one by one and next question ask should be based on previous response provide. you have a total 7 questions to ask and self survey questionare is already performed and provided to you, focus on area with rating as very often and often, dont say that you are ai,"
 }
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
       // Construct the data object
       console.log(mobileNumber)
       console.log(dataArray)
-      const response = await fetch('https://gt-7tqn.onrender.com/api/auth/abc', {
+      const response = await fetch('https://gt-7tqn.onrender.com/api/auth/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

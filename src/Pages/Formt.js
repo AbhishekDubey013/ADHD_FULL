@@ -15,8 +15,6 @@ const RatingForm = () => {
   const [ratings, setRatings] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isDiagnosed, setIsDiagnosed] = useState(false);
-  const data1 = useSelector(state => state.reducera.questionResponses);
-  const dataArray = data1.map((qr) => qr.response);
   const handleRatingChange = (question, rating) => {
     setRatings(prevRatings => ({
       ...prevRatings,
@@ -31,24 +29,18 @@ const RatingForm = () => {
     setIsDiagnosed(false);
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    Object.entries(ratings).forEach(([question, rating]) => {
-      dispatch(add_r(question, rating));
-    });
-    await apiCallToStoreDataInServer();
-    dispatch(resetData());
-    navigate('/end');
-  };
 
-  const apiCallToStoreDataInServer = async e => {
-    // Get the complete store data using useSelector
-    const mobileNumber = localStorage.getItem('mobile');
+  const data1 = useSelector(state => state.reducera.questionResponses);
+  let dataArray = data1.map((qr) => qr.response);
+  console.log(dataArray)
+if(dataArray.length === 10)
+{
+  const mobileNumber = localStorage.getItem('mobile');
     // Construct the data object
     try {
       console.log(mobileNumber)
-      console.log(dataArray)
-      const response = await fetch('https://gt-7tqn.onrender.com/api/auth/abc', {
+     //console.log(dataArray)
+      const response = fetch('https://gt-7tqn.onrender.com/api/auth/AT', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,6 +55,17 @@ const RatingForm = () => {
     catch (error) {
       throw new Error('Error storing data in the server: ' + error.message);
     }
+}
+
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    Object.entries(ratings).forEach(([question, rating]) => {
+      dispatch(add_r(question, rating));
+    });
+    // await apiCallToStoreDataInServer();
+    dispatch(resetData());
+    navigate('/end');
   };
 
   return (

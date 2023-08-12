@@ -78,7 +78,7 @@ const Register = () => {
         try {
           console.log(mobileNumber)
           console.log(dataArray)
-          const response = await fetch('https://gt-7tqn.onrender.com/api/auth/abc', {
+          const response = await fetch('https://gt-7tqn.onrender.com/api/auth/pre', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

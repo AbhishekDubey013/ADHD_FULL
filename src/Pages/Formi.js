@@ -53,6 +53,7 @@ const RatingForm = () => {
                     name={`rating-${currentQuestion}`}
                     value="Very Often"
                     onClick={() => handleRatingChange(questions[currentQuestion], "Very Often")}
+                    onTouchEnd={() => handleRatingChange(questions[currentQuestion], "Very Often")}
                   />
                   <Form.Check
                     type="radio"
@@ -61,6 +62,7 @@ const RatingForm = () => {
                     name={`rating-${currentQuestion}`}
                     value="Often"
                     onClick={() => handleRatingChange(questions[currentQuestion], "Often")}
+                    onTouchEnd={() => handleRatingChange(questions[currentQuestion], "Often")}
                   />
                   <Form.Check
                     type="radio"
@@ -69,6 +71,7 @@ const RatingForm = () => {
                     name={`rating-${currentQuestion}`}
                     value="Sometimes"
                     onClick={() => handleRatingChange(questions[currentQuestion], "Sometimes")}
+                    onTouchEnd={() => handleRatingChange(questions[currentQuestion], "Sometimes")}
                   />
                   <Form.Check
                     type="radio"
@@ -77,6 +80,7 @@ const RatingForm = () => {
                     name={`rating-${currentQuestion}`}
                     value="Rarely"
                     onClick={() => handleRatingChange(questions[currentQuestion], "Rarely")}
+                    onTouchEnd={() => handleRatingChange(questions[currentQuestion], "Rarely")}
                   />
                   <Form.Check
                     type="radio"
@@ -85,6 +89,7 @@ const RatingForm = () => {
                     name={`rating-${currentQuestion}`}
                     value="Never"
                     onClick={() => handleRatingChange(questions[currentQuestion], "Never")}
+                    onTouchEnd={() => handleRatingChange(questions[currentQuestion], "Never")}
                   />
                 </Form.Group>
               </div>
