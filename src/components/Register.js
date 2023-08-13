@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
 import { resetData } from '../redux/action'; 
 import { useSelector } from 'react-redux';
+import './S.css';
 
 const Register = () => {
 

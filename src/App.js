@@ -13,7 +13,7 @@ import Footer  from './components/Footer'
 import Chat from './components/Chat'
 import Comp from './Pages/Comp'
 import Reg from './Pages/Regpage'
-import Ft from './Pages/Formt'
+import Ft from './Pages/Formf'
 import End from './Pages/End'
 
 
@@ -36,7 +36,6 @@ function App() {
         <Route path='/ft' element={<Ft />} />
         <Route path='/end' element={<End />} />
       </Routes>
-      <Footer />
     </div>
   );
 }

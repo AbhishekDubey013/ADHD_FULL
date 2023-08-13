@@ -1,10 +1,5 @@
+
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { add_r } from '../redux/action';
-import { useNavigate } from 'react-router-dom';
-import questionsData from '../components/test.json';
-import { useSelector } from 'react-redux';
-import { resetData } from '../redux/action'; 
 import {
   Container,
   Slider,
@@ -12,6 +7,12 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import { useDispatch } from 'react-redux';
+import { add_r } from '../redux/action';
+import { useNavigate } from 'react-router-dom';
+import questionsData from '../components/test.json';
+import { useSelector } from 'react-redux';
+import { resetData } from '../redux/action'; 
 
 const questions = questionsData.questions;
 
@@ -50,19 +51,19 @@ const RatingForm = () => {
   const classes = useStyles();
   const [ratings, setRatings] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [isDiagnosed, setIsDiagnosed] = useState(false);
-  const handleRatingChange = (question, rating) => {
-    setRatings(prevRatings => ({
+
+  const handleRatingChange = (event, newValue) => {
+    setRatings((prevRatings) => ({
       ...prevRatings,
-      [question]: rating
+      [questions[currentQuestion]]: newValue,
     }));
-    setIsDiagnosed(true);
   };
 
-  
   const handleNextQuestion = () => {
-    setCurrentQuestion(prevQuestion => prevQuestion + 1);
-    setIsDiagnosed(false);
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion((prevQuestion) => prevQuestion + 1);
+      setRatings({});
+    }
   };
 
 
@@ -93,16 +94,14 @@ if(dataArray.length === 10)
     }
 }
 
-
-  const handleSubmit = async e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     Object.entries(ratings).forEach(([question, rating]) => {
       dispatch(add_r(question, rating));
     });
-    // await apiCallToStoreDataInServer();
     dispatch(resetData());
     navigate('/end');
-  };
+    };
 
   return (
     <div className={classes.root}>
@@ -122,7 +121,7 @@ if(dataArray.length === 10)
                 step={1}
                 marks
                 min={0}
-                max={5}
+                max={10}
                 valueLabelDisplay="auto"
                 onClick={(event) => event.preventDefault()}
               />
@@ -157,12 +156,3 @@ if(dataArray.length === 10)
 };
 
 export default RatingForm;
-
-
-
-
-
-
-
-
-
